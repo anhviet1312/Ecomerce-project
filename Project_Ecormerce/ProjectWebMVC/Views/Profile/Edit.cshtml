@@ -1,0 +1,94 @@
+﻿@model ProjectWebMVC.Models.User
+@using System.Text.Json;
+@{
+    ViewData["Title"] = "View";
+    var u = Context.Session.GetString("user");
+    var user = JsonSerializer.Deserialize<User>(u);
+}
+
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 border-bottom-0" style="border-right: 2px solid gray">
+        <form asp-controller="Profile" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" readonly/>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            @*<div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Admin" /> @Html.DisplayNameFor(model => model.Admin)
+                </label>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telephone" class="control-label"></label>
+                <input asp-for="Telephone" class="form-control" />
+                <span asp-validation-for="Telephone" class="text-danger"></span>
+            </div>
+            @if (user!=null && user.Admin)
+            {
+                <div class="form-group">
+                    <label asp-for="Balance" class="control-label"></label>
+                    <input asp-for="Balance" class="form-control" />
+                    <span asp-validation-for="Balance" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="Balance" class="control-label"></label>
+                    <input asp-for="Balance" class="form-control" readonly />
+                    <span asp-validation-for="Balance" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+
+    @if (user!=null && !user.Admin)
+    {
+        <div class="col-md-8">
+            <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action" onclick="viewOrder('@user.Username')">
+                View your orders
+            </button>
+                <button type="button" class="list-group-item list-group-item-action" onclick="viewBalance('@user.Username')">View balance change</button>
+            
+        </div>
+        </div>
+        
+    }
+
+</div>
+
+<div>
+    <a asp-controller="Phone" asp-action="Index">Back to Home</a>
+</div>
+
+<script>
+    function viewOrder(username) {
+        window.location.href = '/Order/Index?username=' + encodeURIComponent(username);
+    }
+    function viewBalance(username) {
+        window.location.href = '/Balance/Index?username=' + encodeURIComponent(username);
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

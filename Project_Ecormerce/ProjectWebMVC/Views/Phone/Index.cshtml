@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="container-fluid row">
+    @{
+        foreach(var phone in ViewBag.Phones)
+        {
+            <div  class="col-sm-3 mt-3 mb-3">
+                <div class="border border-info rounded-2 w-100 py-3" style="min-height: 420px">
+                <img src="@phone.Img" alt="@phone.Name" class="w-100">
+
+                    <div style="position: relative; left: 35px ; margin-top: 12px">
+                    <div style="width: fit-content; padding: 4px" class="bg-warning text-white mb-2 border border-info rounded-3"> So cheap </div>
+                <h5  class="text-wrap">@phone.Name</h5>
+                <p>Price: <span class="fw-bold">@phone.Price </span> $</p>
+                </div>
+
+                    <button id="detailsButton" onclick="getDetails(@phone.Pid)"style="position: relative; left: 50% ; transform: translateX(-50%)">See Detail</button>
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+<script>
+   function getDetails(phoneId) {
+        var url = '@Url.Action("Details", "Phone")' + '?id=' + phoneId;
+        window.location.href = url;
+    }
+</script>
+
+

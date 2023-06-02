@@ -1,0 +1,74 @@
+﻿@model ProjectWebMVC.Models.Order
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Detail</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Userid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Userid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h4>Order Details</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Phone</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orderDetail in Model.OrderDetails)
+            {
+                var total = orderDetail.PidNavigation.Price * orderDetail.Quantity;
+                <tr>
+                    <td>
+                        <img src="@orderDetail.PidNavigation.Img" alt="Phone Image" style="width: 100px; height: auto;" />
+                        <h4>@orderDetail.PidNavigation.Name</h4>
+                    </td>
+                    <td style="position: relative; top: 50px">
+                        <p>@orderDetail.PidNavigation.Price</p>
+                    </td>
+                    <td style="position: relative; top: 50px">@orderDetail.Quantity</td>
+                    <td style="position: relative; top: 50px">@string.Format("{0:0.00}", total)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a href="javascript:history.go(-1)">Back to List</a>
+</div>

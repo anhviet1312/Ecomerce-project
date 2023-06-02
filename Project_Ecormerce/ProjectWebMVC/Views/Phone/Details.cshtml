@@ -1,0 +1,76 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    
+*@
+@{
+      var phone = ViewBag.phone;
+    var phoneDetails = ViewBag.phoneDetails;
+}
+ <h2>@phone.Name</h2>
+<div class="container-fluid d-flex justify-content-between w-70 mx-auto border border-info" style="margin-top: 10px" >
+    @{
+        
+       
+
+        <div  class="mt-3 mb-3"  style="flex-basis: 30%">
+                <img src="@phone.Img" alt="@phone.Name" class="w-100">
+        </div>
+        <div style="flex-basis: 65% ; margin-top: 4px ; position: relative">
+             <table class="table">
+                <tr>
+                <th scope="row">
+                    Ram
+                </th>
+                <td>@phoneDetails.Ram GB</td>
+                </tr>
+               
+                <tr>
+                    <th scope="row">
+                    Storage
+                    </th>
+                    <td>@phoneDetails.Storage GB</td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                   Camera
+                    </th>
+                    <td>@phoneDetails.Camera MP</td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                   Pin
+                    </th>
+                    <td>@phoneDetails.Pin mAh</td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Cost
+                    </th>
+                    <td><span style="color: red">@phone.Price</span> $ </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Remain
+                    </th>
+                    <td>@phone.Quantity </td>
+                </tr>
+               
+             </table>
+             <button id="detailsButton" style="position: relative ; left: 50%; transform: translateX(-50%)" class="btn btn-primary mt-3">Add to cart</button>
+        </div>
+    }
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#detailsButton').on('click', function () {
+            var id = @phone.Pid; // Get the current phone's ID
+            window.location.href = '@Url.Action("Buy", "Phone")' + '?id=' + id;
+        });
+    });
+</script>
+
+
+
+

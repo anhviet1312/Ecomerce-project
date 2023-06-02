@@ -1,0 +1,244 @@
+﻿@using System.Text.Json;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<head>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+</head>
+<div class="container">
+    <h3>My shopping cart</h3>
+    <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+        <div>
+            @{
+                var cartList = Context.Session.GetString("cartList");
+                if (cartList == null)
+                {
+                    <div>
+                        <i style="position: relative;
+                                    transform: translateX(-50%);
+                                    left: 50%;" class="fas fa-sad-tear fa-5x"></i>
+                        <p class="mt-1">Your cart is empty now!</p>
+                    </div>
+                }
+                else
+                {
+                    var cartPhones = JsonSerializer.Deserialize<List<Phone>>(cartList);
+                    var total = 0.0;
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Product</th>
+                                <th scope="col"></th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col"></th>
+                                <th style="padding-left: 20px;" scope="col">Remove</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int index = 1;
+
+                                foreach (var cartPhone in cartPhones)
+                                {
+                                    total += cartPhone.Price * cartPhone.Quantity;
+
+                                    <tr>
+                                        <th scope="row">@index</th>
+                                        <td style="min-width: 300px;">@cartPhone.Name</td>
+                                        <td><button class="sub-btn" data-id="@cartPhone.Pid"><i class="fas fa-minus subtract-icon"></i></button></td>
+                                        <td style="text-align: center">@cartPhone.Quantity</td>
+                                        <td><button class="add-btn" id="@cartPhone.Pid" data-id="@cartPhone.Pid"><i class="fas fa-plus add-icon"></i></button> </td>
+                                        <td style="text-align: center;padding-left: 20px;"><button class="remove-btn" data-id="@cartPhone.Pid"><i class="fas fa-trash remove-icon"></i></button></td>
+                                        <td>@cartPhone.Price</td>
+                                    </tr>
+                                    index++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                    <p style="text-align: right;"> Total: <span id="total">@total</span> </p>
+
+                <div class="d-flex justify-content-end">
+                        <button id="checkout" class="btn btn-outline-primary">
+                            <a href="@Url.Action("Checkout", "Cart")">Checkout</a>
+                        </button>
+
+                 </div>
+                }
+            }
+        </div>
+
+    </div>
+    @if (TempData["ErrorCheckout"] != null)
+    {
+        <div class="alert alert-danger" style="text-align:center" role="alert">
+            @TempData["ErrorCheckout"]
+        </div>
+    }
+    <button id="shopping" style="display: block" class="btn btn-primary btn-lg mx-auto">Shopping now</button>
+</div>
+
+<style>
+    .empty-icon {
+        width: 80px;
+        height: 80px;
+        color: gray;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(function () {
+
+        $('.sub-btn').click(function () {
+            var $subBtn = $(this);
+            var productId = $subBtn.data('id');
+            var quantityElement = $subBtn.closest('tr').find('td:nth-child(4)');
+            var quantity = parseInt(quantityElement.text());
+            var totalElement = $('#total');
+            var currentTotal = parseFloat(totalElement.text());
+            var priceElement = $subBtn.closest('tr').find('td:last-child');
+            var price = parseFloat(priceElement.text());
+
+            if (quantity > 0) {
+                $.ajax({
+                    url: '/Phone/GetPhoneById', // Update the URL to match your server-side route
+                    type: 'GET',
+                    data: { id: productId },
+                    success: function (response) {
+                        if (response.quantity == quantity) {
+                            $('#' + productId).prop('disabled', false);
+                        }
+                        quantity--;
+                        quantityElement.text(quantity);
+                        var newTotal = currentTotal - price;
+                        totalElement.text(newTotal.toFixed(2));
+                        updateQuantity(productId, quantity);
+
+                        if (quantity === 0) {
+                            $subBtn.prop('disabled', true);
+                            $subBtn.closest('tr').remove();
+                            updateCartUI();
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+
+        $('.add-btn').click(function () {
+            var $addBtn = $(this);
+            var productId = $addBtn.data('id');
+            var quantityElement = $addBtn.closest('tr').find('td:nth-child(4)');
+            var quantity = parseInt(quantityElement.text());
+            var totalElement = $('#total');
+            var currentTotal = parseFloat(totalElement.text());
+            var priceElement = $addBtn.closest('tr').find('td:last-child');
+            var price = parseFloat(priceElement.text());
+
+            $.ajax({
+                url: '/Phone/GetPhoneById', // Update the URL to match your server-side route
+                type: 'GET',
+                data: { id: productId },
+                success: function (response) {
+                    if (response.quantity > quantity) {
+                        quantity++;
+                        quantityElement.text(quantity);
+                        if (quantity == response.quantity) {
+                            $('#' + productId).prop('disabled', true);
+                        }
+                        var newTotal = currentTotal + price;
+                        totalElement.text(newTotal.toFixed(2));
+                    }
+                    updateQuantity(productId, quantity);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('.remove-btn').click(function () {
+            var $removeBtn = $(this);
+            var productId = $removeBtn.data('id');
+            var quantityElement = $removeBtn.closest('tr').find('td:nth-child(4)');
+            var quantity = parseInt(quantityElement.text());
+            var totalElement = $('#total');
+            var currentTotal = parseFloat(totalElement.text());
+            var priceElement = $removeBtn.closest('tr').find('td:last-child');
+            var price = parseFloat(priceElement.text());
+
+            $.ajax({
+                url: '/Phone/GetPhoneById', // Update the URL to match your server-side route
+                type: 'GET',
+                data: { id: productId },
+                success: function (response) {
+                    var newTotal = currentTotal - (price * quantity);
+                    totalElement.text(newTotal.toFixed(2));
+                    $removeBtn.closest('tr').remove();
+                   // updateCartUI();
+                    removeProduct(productId);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        function updateQuantity(productId, quantity) {
+            // Implement your logic to update the quantity in the cart
+            // using an AJAX request or any other method suitable for your application.
+            // You can send the updated quantity and product ID to the server.
+            $.ajax({
+                url: '/Phone/UpdateQuantity', // Update the URL to match your server-side route
+                type: 'POST',
+                data: { id: productId, quantity: quantity },
+                success: function (response) {
+                    // Handle the success response, if needed
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function removeProduct(productId) {
+            // Implement your logic to remove the product from the cart
+            // using an AJAX request or any other method suitable for your application.
+            // You can send the product ID to the server for removal.
+            $.ajax({
+                url: '/Phone/RemoveFromCart', // Update the URL to match your server-side route
+                type: 'POST',
+                data: { id: productId },
+                success: function (response) {
+                    // Handle the success response, if needed
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function updateCartUI() {
+            // Check if the cart is empty after removing the product
+            //if ($('.table tbody tr').length === 0) {
+            //    var emptyCartHTML = '<div><i style="position: relative; transform: translateX(-50%); left: 50%;" class="fas fa-sad-tear fa-5x"></i><p class="mt-1">Your cart is empty now!</p></div>';
+            //    $('.container').html(emptyCartHTML);
+            //}
+            location.reload();
+            
+        }
+
+        $('#shopping').on('click', function () {
+            window.location.href = '@Url.Action("Index", "Phone")';
+        });
+    });
+</script>
