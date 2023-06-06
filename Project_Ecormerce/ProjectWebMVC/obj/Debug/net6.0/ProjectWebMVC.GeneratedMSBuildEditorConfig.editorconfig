@@ -9,73 +9,81 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ProjectWebMVC
 build_property.RootNamespace = ProjectWebMVC
-build_property.ProjectDir = D:\VScode\Project_Ecormerce\ProjectWebMVC\
+build_property.ProjectDir = D:\VScode\Pr_Ecormerce\Project_Ecormerce\ProjectWebMVC\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\VScode\Project_Ecormerce\ProjectWebMVC
+build_property.MSBuildProjectDirectory = D:\VScode\Pr_Ecormerce\Project_Ecormerce\ProjectWebMVC
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Balance/Index.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Balance/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Cart/Index.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Home/Index.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Home/Privacy.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Login/Index.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Order/Detail.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Order/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Order/Index.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Order/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Phone/Create.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Phone/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Phone/Details.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Phone/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Phone/Index.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Phone/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Phone/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Profile/Edit.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Phone/ManagePhone.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmVcTWFuYWdlUGhvbmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Profile/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Shared/Error.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/_ViewImports.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/_ViewStart.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/VScode/Project_Ecormerce/ProjectWebMVC/Views/Shared/_Layout.cshtml]
+[D:/VScode/Pr_Ecormerce/Project_Ecormerce/ProjectWebMVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-otj2zw9kwt

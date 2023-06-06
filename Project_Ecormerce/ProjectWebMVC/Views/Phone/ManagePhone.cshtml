@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjectWebMVC.Models.Phone>
+
+@{
+    ViewData["Title"] = "ManagePhone";
+    
+}
+
+<h1>ManagePhone</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th> Name </th>
+            <th> Category </th>
+            <th> Description </th>
+            <th> IMG Link</th>
+            <th> Price</th>
+            <th> Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var listPhone = ViewBag.Phones;
+            var dem = 0;
+            foreach (var item in listPhone)
+            {
+                dem++;
+                <tr>
+                    <td>@dem</td>
+                    <td>@item.Name</td>
+                    <td>@item.CidNavigation.Cname</td>
+                            <td>@item.Description</td>
+                            <td>@item.Img</td>
+                            <td>@item.Price</td>
+                            <td>@item.Quantity</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {  id=item.Pid  }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.Pid }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Pid })
+                    </td>
+                </tr>
+        }
+}
+    </tbody>
+</table>

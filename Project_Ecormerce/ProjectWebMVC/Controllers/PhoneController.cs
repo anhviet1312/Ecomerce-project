@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProjectWebMVC.Models;
 using System.Collections.Generic;
 using System.Security.Cryptography.Pkcs;
@@ -17,7 +19,11 @@ namespace ProjectWebMVC.Controllers
             ViewBag.Phones = context.Phones.ToList().Where(p => p.Quantity > 0);
             return View();
         }
-
+        public ActionResult ManagePhone()
+        {
+            ViewBag.Phones = context.Phones.Include(p => p.CidNavigation).ToList();
+            return View();
+        }
         // GET: PhoneController/Details/5
         public ActionResult Details(int id)
         {
@@ -110,28 +116,45 @@ namespace ProjectWebMVC.Controllers
 
         public ActionResult GetPhoneById(int id)
         {
-            var phone = context.Phones.Where(p => p.Pid == id).FirstOrDefault(); ; // Assuming you already have the GetPhoneById method implemented
+            var phone = context.Phones.Where(p => p.Pid == id).FirstOrDefault(); // Assuming you already have the GetPhoneById method implemented
             return Json(phone);
         }
         // GET: PhoneController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var phone = context.Phones.Where(p => p.Pid == id).FirstOrDefault();
+            var categories = context.Categories.ToList();
+            var categoryList = categories.Select(c => new SelectListItem { Value = c.Cid.ToString(), Text = c.Cname }).ToList();
+            ViewBag.Categories = new SelectList(categoryList, "Value", "Text", phone.Cid);
+            return View(phone);
         }
 
         // POST: PhoneController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Phone phone)
         {
-            try
+            if (id != phone.Pid)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    context.Update(phone);
+                    context.SaveChanges();
+                    return Edit(id);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                }
             }
+            var categories = context.Categories.ToList();
+            var categoryList = categories.Select(c => new SelectListItem { Value = c.Cid.ToString(), Text = c.Cname }).ToList();
+            ViewBag.Categories = new SelectList(categoryList, "Value", "Text", phone.Cid);
+            return Edit(id);
         }
 
         // GET: PhoneController/Delete/5
