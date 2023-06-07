@@ -74,6 +74,22 @@
         
     }
 
+    @if (user != null && user.Admin)
+    {
+        <div class="col-md-8">
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action" onclick="viewListPhone()">
+                    List Phone
+                </button>
+                <button type="button" class="list-group-item list-group-item-action" onclick="addPhone()">
+                    Add Phone
+                </button>
+            </div>
+        </div>
+
+    }
+
+
 </div>
 
 <div>
@@ -86,6 +102,12 @@
     }
     function viewBalance(username) {
         window.location.href = '/Balance/Index?username=' + encodeURIComponent(username);
+    }
+    function viewListPhone(){
+        window.location.href = '/Phone/ManagePhone'
+    }
+    function addPhone() {
+        window.location.href = '/Phone/ManagePhone'
     }
 </script>
 
