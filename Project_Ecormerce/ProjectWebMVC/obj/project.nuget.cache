@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1vP6XCbTAJr1Zy6eMcYc/7Y/VktQZ0LfhBE68l70Qlg3avk+RTn5nYxX7zTYLA/aDSJrtH0rZ7NoKcdk5kuSfA==",
+  "dgSpecHash": "ViKpxI/XNeKWhLiMfox6t9zhVrt1IdFXKZkgIu0CaFAx49nrEJgVJxJbyKt5SkSU45T5LVU8ntCKXi7SisLtrg==",
   "success": true,
-  "projectFilePath": "D:\\VScode\\Project_Ecormerce\\ProjectWebMVC\\ProjectWebMVC.csproj",
+  "projectFilePath": "D:\\VScode\\Pr_Ecormerce\\Project_Ecormerce\\ProjectWebMVC\\ProjectWebMVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hoang Quoc Viet\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Hoang Quoc Viet\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

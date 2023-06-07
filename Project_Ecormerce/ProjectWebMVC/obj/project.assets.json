@@ -10764,11 +10764,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VScode\\Project_Ecormerce\\ProjectWebMVC\\ProjectWebMVC.csproj",
+      "projectUniqueName": "D:\\VScode\\Pr_Ecormerce\\Project_Ecormerce\\ProjectWebMVC\\ProjectWebMVC.csproj",
       "projectName": "ProjectWebMVC",
-      "projectPath": "D:\\VScode\\Project_Ecormerce\\ProjectWebMVC\\ProjectWebMVC.csproj",
+      "projectPath": "D:\\VScode\\Pr_Ecormerce\\Project_Ecormerce\\ProjectWebMVC\\ProjectWebMVC.csproj",
       "packagesPath": "C:\\Users\\Hoang Quoc Viet\\.nuget\\packages\\",
-      "outputPath": "D:\\VScode\\Project_Ecormerce\\ProjectWebMVC\\obj\\",
+      "outputPath": "D:\\VScode\\Pr_Ecormerce\\Project_Ecormerce\\ProjectWebMVC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hoang Quoc Viet\\AppData\\Roaming\\NuGet\\NuGet.Config",
