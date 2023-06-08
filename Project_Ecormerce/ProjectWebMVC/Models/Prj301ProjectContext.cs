@@ -134,7 +134,7 @@ public partial class Prj301ProjectContext : DbContext
 
             entity.Property(e => e.Pid)
                 .ValueGeneratedNever()
-                .HasColumnName("pid");
+                .HasColumnName("pid").ValueGeneratedOnAdd(); ;
             entity.Property(e => e.Cid).HasColumnName("cid");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.Img)
