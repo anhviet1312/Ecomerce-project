@@ -6,22 +6,28 @@
     @{
         foreach(var phone in ViewBag.Phones)
         {
-            <div  class="col-sm-3 mt-3 mb-3">
+            <div class="col-sm-3 mt-3 mb-3">
                 <div class="border border-info rounded-2 w-100 py-3" style="min-height: 420px">
-                <img src="@phone.Img" alt="@phone.Name" class="w-100">
+                    @{
+                        string imageSource = phone.Img;
+                        if (!Uri.IsWellFormedUriString(imageSource, UriKind.Absolute))
+                        {
+                            imageSource = "https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg";
+                        }
+                    }
+                    <img src="@imageSource" alt="@phone.Name" class="w-100">
 
                     <div style="position: relative; left: 35px ; margin-top: 12px">
-                    <div style="width: fit-content; padding: 4px" class="bg-warning text-white mb-2 border border-info rounded-3"> So cheap </div>
-                <h5  class="text-wrap">@phone.Name</h5>
-                <p>Price: <span class="fw-bold">@phone.Price </span> $</p>
-                </div>
+                        <div style="width: fit-content; padding: 4px" class="bg-warning text-white mb-2 border border-info rounded-3"> So cheap </div>
+                        <h5 class="text-wrap">@phone.Name</h5>
+                        <p>Price: <span class="fw-bold">@phone.Price</span> $</p>
+                    </div>
 
-                    <button id="detailsButton" onclick="getDetails(@phone.Pid)"style="position: relative; left: 50% ; transform: translateX(-50%)">See Detail</button>
+                    <button id="detailsButton" onclick="getDetails(@phone.Pid)" style="position: relative; left: 50%; transform: translateX(-50%)">See Detail</button>
                 </div>
             </div>
         }
     }
-
 </div>
 
 <script>

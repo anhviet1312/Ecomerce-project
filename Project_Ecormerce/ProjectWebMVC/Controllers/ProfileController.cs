@@ -11,7 +11,12 @@ namespace ProjectWebMVC.Controllers
         private readonly Prj301ProjectContext context = new Prj301ProjectContext();
         public ActionResult Index()
         {
-            return View();
+
+            try { var users = context.Users.Where(u => !u.Admin).ToList(); return View(users); }
+            catch (Exception ex)
+            {
+                return View();
+            }
         }
 
         // GET: ProfileController/Details/5
@@ -81,23 +86,38 @@ namespace ProjectWebMVC.Controllers
         }
 
         // GET: ProfileController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string username)
         {
-            return View();
+            try
+            {
+                var user = context.Users.Where(u => u.Username == username).FirstOrDefault();
+                return View(user);
+            }
+            catch(Exception e)
+            {
+                return View();
+            }
         }
 
         // POST: ProfileController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeleteConfirmed(string username)
         {
+            var user = context.Users.Where(u => u.Username == username).FirstOrDefault();
             try
             {
+                if (user != null)
+                {
+                    context.Users.Remove(user);
+                    context.SaveChanges();
+                    
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
     }

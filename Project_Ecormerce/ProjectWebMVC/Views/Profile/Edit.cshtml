@@ -81,8 +81,11 @@
                 <button type="button" class="list-group-item list-group-item-action" onclick="viewListPhone()">
                     List Phone
                 </button>
-                <button type="button" class="list-group-item list-group-item-action" onclick="addPhone()">
-                    Add Phone
+                <button type="button" class="list-group-item list-group-item-action" onclick="viewOrder()">
+                    List Order
+                </button>
+                <button type="button" class="list-group-item list-group-item-action" onclick="viewListUser()">
+                    List User
                 </button>
             </div>
         </div>
@@ -97,7 +100,7 @@
 </div>
 
 <script>
-    function viewOrder(username) {
+    function viewOrder(username ='') {
         window.location.href = '/Order/Index?username=' + encodeURIComponent(username);
     }
     function viewBalance(username) {
@@ -106,8 +109,9 @@
     function viewListPhone(){
         window.location.href = '/Phone/ManagePhone'
     }
-    function addPhone() {
-        window.location.href = '/Phone/ManagePhone'
+
+    function viewListUser() {
+        window.location.href = '/Profile/Index'
     }
 </script>
 
