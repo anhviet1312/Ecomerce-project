@@ -17,8 +17,44 @@ namespace ProjectWebMVC.Controllers
         public ActionResult Index()
         {
             ViewBag.Phones = context.Phones.ToList().Where(p => p.Quantity > 0);
+            ViewBag.Categories = context.Categories.ToList();
             return View();
         }
+
+            [HttpPost]
+            public ActionResult Search(string searchKey, int? category, int? minPrice, int? maxPrice)
+            {
+                var phonesQuery = context.Phones.Where(p => p.Quantity > 0);
+
+                // Apply search keyword filter
+                if (!string.IsNullOrEmpty(searchKey))
+                {
+                    phonesQuery = phonesQuery.Where(p => p.Name.Contains(searchKey));
+                }
+
+                // Apply category filter
+                if (category.HasValue)
+                {
+                    phonesQuery = phonesQuery.Where(p => p.Cid == category.Value);
+                }
+
+                // Apply price range filter
+                if (minPrice.HasValue)
+                {
+                    phonesQuery = phonesQuery.Where(p => p.Price >= minPrice.Value);
+                }
+
+                if (maxPrice.HasValue)
+                {
+                    phonesQuery = phonesQuery.Where(p => p.Price <= maxPrice.Value);
+                }
+
+                ViewBag.Phones = phonesQuery.ToList();
+                ViewBag.Categories = context.Categories.ToList();
+                return View("Index");
+            }
+        
+
         public ActionResult ManagePhone()
         {
             ViewBag.Phones = context.Phones.Include(p => p.CidNavigation).ToList();
@@ -31,6 +67,7 @@ namespace ProjectWebMVC.Controllers
             ViewBag.phoneDetails = context.PhoneDetails.Where(p => p.Pdid== id).FirstOrDefault();
             return View();
         }
+        
         public ActionResult Buy(int id)
         {
             

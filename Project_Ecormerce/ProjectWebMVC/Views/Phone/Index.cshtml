@@ -1,13 +1,50 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
+<style>
+    .form-item{
+        width: 40%;
+        margin-left: 10%;
+    }
+</style>
 <div class="container-fluid row">
+    <form action="/phone/search" method="post" style="width: 800px ; display:flex; flex-wrap: wrap">
+        <div class="form-item">
+            <label for="exampleInputEmail1" class="form-label">Search</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="searchKey">
+        </div>
+        <div class="form-item">
+            <label for="exampleSelect" class="form-label">Category</label>
+            <select class="form-select" id="exampleSelect" name="category">
+                <!option value="" @(string.IsNullOrEmpty(ViewBag.Cname) ? "selected" : "")>All</!option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <!option value="@category.Cid" @(category.Cname == ViewBag.Cname ? "selected" : "")>@category.Cname</!option>
+                }
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="minPrice" class="form-label">Min Price</label>
+            <input type="text" class="form-control" id="minPrice" name="minPrice" onchange="validatePriceRange()">
+            <small id="minPriceError" class="text-danger"></small>
+        </div>
+        <div class="form-item">
+            <label for="maxPrice" class="form-label">Max Price</label>
+            <input type="text" class="form-control" id="maxPrice" name="maxPrice" onchange="validatePriceRange()">
+            <small id="maxPriceError" class="text-danger"></small>
+        </div>
+        <div style="width: 100%; display: flex;justify-content: end; margin-top: 10px">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+    
+    </div>
+    <div class="row">
     @{
         foreach(var phone in ViewBag.Phones)
         {
             <div class="col-sm-3 mt-3 mb-3">
-                <div class="border border-info rounded-2 w-100 py-3" style="min-height: 420px">
+                <div class="border border-info rounded-2 w-100 py-3 shadow" style="min-height: 420px">
                     @{
                         string imageSource = phone.Img;
                         if (!Uri.IsWellFormedUriString(imageSource, UriKind.Absolute))
@@ -17,9 +54,10 @@
                     }
                     <img src="@imageSource" alt="@phone.Name" class="w-100">
 
-                    <div style="position: relative; left: 35px ; margin-top: 12px">
+                    <div class="" style="position: relative; left: 35px ; margin-top: 12px">
                         <div style="width: fit-content; padding: 4px" class="bg-warning text-white mb-2 border border-info rounded-3"> So cheap </div>
-                        <h5 class="text-wrap">@phone.Name</h5>
+                        <h5 style="line-height: 1.8rem ; height: 1.8rem; overflow: hidden; text-overflow: ellipsis;
+                         white-space: nowrap; max-width: 250px ">@phone.Name</h5>
                         <p>Price: <span class="fw-bold">@phone.Price</span> $</p>
                     </div>
 
@@ -28,13 +66,43 @@
             </div>
         }
     }
-</div>
+    </div>
 
 <script>
    function getDetails(phoneId) {
         var url = '@Url.Action("Details", "Phone")' + '?id=' + phoneId;
         window.location.href = url;
     }
+    function validatePriceRange() {
+        var minPrice = document.getElementById("minPrice").value;
+        var maxPrice = document.getElementById("maxPrice").value;
+        var minPriceError = document.getElementById("minPriceError");
+        var maxPriceError = document.getElementById("maxPriceError");
+
+        minPriceError.textContent = ""; // Clear previous error message
+        maxPriceError.textContent = ""; // Clear previous error message
+
+        if (minPrice !== "" && !Number.isInteger(parseInt(minPrice))) {
+            minPriceError.textContent = "Minimum price must be an integer.";
+            document.getElementById("minPrice").value = ""; // Clear the invalid value
+        }
+
+        if (maxPrice !== "" && !Number.isInteger(parseInt(maxPrice))) {
+            maxPriceError.textContent = "Maximum price must be an integer.";
+            document.getElementById("maxPrice").value = ""; // Clear the invalid value
+        }
+
+        if (minPrice !== "" && maxPrice !== "") {
+            var min = parseInt(minPrice);
+            var max = parseInt(maxPrice);
+
+            if (min >= max) {
+                maxPriceError.textContent = "Minimum price must be smaller than the maximum price.";
+                document.getElementById("maxPrice").value = ""; // Clear the invalid value
+            }
+        }
+    }
 </script>
+
 
 
