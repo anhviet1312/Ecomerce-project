@@ -30,28 +30,36 @@ namespace ProjectWebMVC.Controllers
                 if (!string.IsNullOrEmpty(searchKey))
                 {
                     phonesQuery = phonesQuery.Where(p => p.Name.Contains(searchKey));
+                    
                 }
 
                 // Apply category filter
-                if (category.HasValue)
+                if (category > 0)
                 {
                     phonesQuery = phonesQuery.Where(p => p.Cid == category.Value);
+                    
                 }
 
                 // Apply price range filter
                 if (minPrice.HasValue)
                 {
                     phonesQuery = phonesQuery.Where(p => p.Price >= minPrice.Value);
+                
                 }
 
                 if (maxPrice.HasValue)
                 {
                     phonesQuery = phonesQuery.Where(p => p.Price <= maxPrice.Value);
+                    
                 }
 
                 ViewBag.Phones = phonesQuery.ToList();
                 ViewBag.Categories = context.Categories.ToList();
-                return View("Index");
+            ViewBag.searchKey = searchKey;
+            ViewBag.max = maxPrice;
+            ViewBag.category = category;
+            ViewBag.min = minPrice;
+            return View("Index");
             }
         
 

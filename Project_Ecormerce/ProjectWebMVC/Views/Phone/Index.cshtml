@@ -8,37 +8,37 @@
     }
 </style>
 <div class="container-fluid row">
-    <form action="/phone/search" method="post" style="width: 800px ; display:flex; flex-wrap: wrap">
+    <form action="/phone/search" method="post" style="width: 800px; display:flex; flex-wrap: wrap">
         <div class="form-item">
             <label for="exampleInputEmail1" class="form-label">Search</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="searchKey">
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="searchKey" value="@ViewBag.searchKey">
         </div>
         <div class="form-item">
             <label for="exampleSelect" class="form-label">Category</label>
             <select class="form-select" id="exampleSelect" name="category">
-                <!option value="" @(string.IsNullOrEmpty(ViewBag.Cname) ? "selected" : "")>All</!option>
+                <!option value="0" @(ViewBag.category ==0 ? "selected" : "")>All</!option>
                 @foreach (var category in ViewBag.Categories)
                 {
-                    <!option value="@category.Cid" @(category.Cname == ViewBag.Cname ? "selected" : "")>@category.Cname</!option>
+                    <!option value="@category.Cid" @(category.Cid == ViewBag.category ? "selected" : "")>@category.Cname</!option>
                 }
             </select>
         </div>
         <div class="form-item">
             <label for="minPrice" class="form-label">Min Price</label>
-            <input type="text" class="form-control" id="minPrice" name="minPrice" onchange="validatePriceRange()">
+            <input type="text" class="form-control" id="minPrice" name="minPrice" onchange="validatePriceRange()" value="@ViewBag.min">
             <small id="minPriceError" class="text-danger"></small>
         </div>
         <div class="form-item">
             <label for="maxPrice" class="form-label">Max Price</label>
-            <input type="text" class="form-control" id="maxPrice" name="maxPrice" onchange="validatePriceRange()">
+            <input type="text" class="form-control" id="maxPrice" name="maxPrice" onchange="validatePriceRange()" value="@ViewBag.max">
             <small id="maxPriceError" class="text-danger"></small>
         </div>
         <div style="width: 100%; display: flex;justify-content: end; margin-top: 10px">
             <button type="submit" class="btn btn-primary">Filter</button>
         </div>
     </form>
-    
-    </div>
+</div>
+
     <div class="row">
     @{
         foreach(var phone in ViewBag.Phones)
