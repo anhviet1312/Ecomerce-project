@@ -56,7 +56,11 @@
                 </tr>
                
              </table>
-             <button id="detailsButton" style="position: relative ; left: 50%; transform: translateX(-50%)" class="btn btn-primary mt-3">Add to cart</button>
+            <div style="display: flex; justify-content: space-around">
+                <button id="backToListButton" style="" class="btn btn-primary mt-3">Back to list</button>
+            <button id="detailsButton" style="" class="btn btn-primary mt-3">Add to cart</button> 
+            </div>
+             
         </div>
     }
 
@@ -68,8 +72,13 @@
             var id = @phone.Pid; // Get the current phone's ID
             window.location.href = '@Url.Action("Buy", "Phone")' + '?id=' + id;
         });
+
+        $('#backToListButton').on('click', function () {
+            history.back(); // Go back to the previous page
+        });
     });
 </script>
+
 
 
 
